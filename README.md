@@ -23,14 +23,6 @@ Application web autonome et pensée pour smartphone (un seul fichier HTML) pour 
 
 Ouvrir la page, déplier une section, régler les molettes, et lire les totaux calculés en bas. La contrainte 24 h est gérée automatiquement sur les heures.
 
-## Hébergement (GitHub Pages)
-
-1. Créer un dépôt et y déposer le fichier `hdv.html` (idéalement renommé `index.html`).
-2. Dans **Settings → Pages**, choisir la branche `main` et le dossier racine `/`.
-3. Ouvrir l'URL `https://<utilisateur>.github.io/<dépôt>/` fournie.
-
-> **Important — persistance des données.** Les préférences (et tout stockage web) ne sont conservées de façon fiable que si la page est servie depuis une vraie origine `https://`. C'est exactement ce que fournit GitHub Pages. Ouvrir le fichier en local (`file://` ou `content://` sur Android) empêche cette persistance.
-
 ## Installation sur l'écran d'accueil
 
 Une fois la page en ligne, l'ouvrir depuis le navigateur mobile puis choisir **« Ajouter à l'écran d'accueil »**. Le raccourci pointe vers l'URL `https://`, ce qui préserve la persistance des réglages.
