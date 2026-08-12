@@ -665,6 +665,9 @@
             <div class="recap-tdv">
               Calculé : <span id="recapTdvMin">0 min</span> soit <span id="recapTdvHM">00 h 00</span>
             </div>
+            <div class="recap-tdv">
+              Décimal : <span id="recapTdvDec">0,00</span> h
+            </div>
           </div>
         </div>
       </section>
@@ -986,6 +989,7 @@
   const recapHoraArr = document.getElementById('recapHoraArr');
   const recapTdvMin = document.getElementById('recapTdvMin');
   const recapTdvHM = document.getElementById('recapTdvHM');
+  const recapTdvDec = document.getElementById('recapTdvDec');
   const totalReasonEl = document.getElementById('totalReason');
 
   // bloc: [H,H,M,M] -> minutes depuis minuit
@@ -1026,6 +1030,8 @@
     const hh = Math.floor(diff / 60), mm = diff % 60;
     recapTdvMin.textContent = diff + ' min';
     recapTdvHM.textContent = pad2(hh) + ' h ' + pad2(mm);
+    // heures décimales : minutes / 60, 2 décimales, virgule française
+    recapTdvDec.textContent = (diff / 60).toFixed(2).replace('.', ',');
 
     // --- Écart horamètre (centièmes d'heure) pour le contrôle de cohérence ---
     let dc = horaToCent(arrHora) - horaToCent(depHora);
