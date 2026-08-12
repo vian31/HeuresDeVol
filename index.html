@@ -333,34 +333,39 @@
     50%      { opacity: 0.25; }
   }
 
-  .recap-block { margin-bottom: 18px; }
+  .recap-block { margin-bottom: 20px; }
   .recap-block:last-child { margin-bottom: 0; }
   .recap-title {
-    font-size: 15px;
-    letter-spacing: 0.1em;
+    font-size: 13px;
+    letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: #fff;
+    color: #ffd27f;
     font-weight: 800;
-    margin-bottom: 10px;
+    margin-bottom: 12px;
     padding-left: 10px;
-    border-left: 3px solid var(--accent-soft);
+    border-left: 3px solid #ffd27f;
   }
   .recap-line {
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 10px;
-    padding: 5px 0;
+    padding: 7px 0;
   }
   .recap-key {
     font-size: 15px;
-    color: var(--accent-soft);
+    font-weight: 600;
+    color: #bfe3c9;
+    flex: 0 0 auto;
   }
   .recap-val {
     font-size: 23px;
-    font-weight: 700;
+    font-weight: 600;
     font-variant-numeric: tabular-nums;
     color: #fff;
+    background: rgba(0,0,0,0.28);
+    border-radius: 8px;
+    padding: 5px 14px;
   }
   /* Ligne compteur : label + deux cadres sur la même ligne */
   .recap-counter { flex-wrap: wrap; gap: 8px; }
@@ -368,25 +373,37 @@
   .recap-box {
     flex: 1 1 0;
     font-size: 23px;
-    font-weight: 700;
+    font-weight: 600;
     font-variant-numeric: tabular-nums;
     font-family: var(--digit-font);
     color: #fff;
-    background: rgba(255,255,255,0.12);
-    border: 1px solid rgba(255,255,255,0.25);
+    background: rgba(0,0,0,0.28);
+    border: 1px solid rgba(255,255,255,0.18);
     border-radius: 8px;
-    padding: 7px 8px;
+    padding: 8px 8px;
     min-width: 78px;
     text-align: center;
   }
   .recap-tdv {
-    font-size: 21px;
-    color: #fff;
-    line-height: 1.5;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 7px 0;
   }
-  .recap-tdv span {
-    font-weight: 800;
+  .recap-tdv-key {
+    font-size: 15px;
+    font-weight: 600;
+    color: #bfe3c9;
+  }
+  .recap-tdv-val {
+    font-size: 23px;
+    font-weight: 600;
     font-variant-numeric: tabular-nums;
+    color: #fff;
+    background: rgba(0,0,0,0.28);
+    border-radius: 8px;
+    padding: 5px 14px;
   }
 
   /* Barre du bas + bouton Paramètres */
@@ -485,6 +502,14 @@
     transition: background 0.15s, color 0.15s;
   }
   .reset-btn:active { background: #c0392b; color: #fff; }
+
+  .version {
+    text-align: center;
+    font-size: 12px;
+    color: var(--muted);
+    padding: 4px 0 8px;
+    letter-spacing: 0.04em;
+  }
 
   /* Liste d'aide */
   .help-list {
@@ -640,13 +665,13 @@
           <div class="section-title">Retour de vol</div>
 
           <div class="recap-block">
-            <div class="recap-title">Vol</div>
+            <div class="recap-title">Vol (heure locale)</div>
             <div class="recap-line">
-              <span class="recap-key">Départ (local)</span>
+              <span class="recap-key">Départ</span>
               <span class="recap-val" id="recapDepDT">—</span>
             </div>
             <div class="recap-line">
-              <span class="recap-key">Arrivée (local)</span>
+              <span class="recap-key">Arrivée</span>
               <span class="recap-val" id="recapArrDT">—</span>
             </div>
           </div>
@@ -663,10 +688,12 @@
           <div class="recap-block">
             <div class="recap-title">Temps de vol</div>
             <div class="recap-tdv">
-              Calculé : <span id="recapTdvMin">0 min</span> soit <span id="recapTdvHM">00 h 00</span>
+              <span class="recap-tdv-key">Horaire</span>
+              <span class="recap-tdv-val"><span id="recapTdvMin">0 min</span> · <span id="recapTdvHM">00 h 00</span></span>
             </div>
             <div class="recap-tdv">
-              Décimal : <span id="recapTdvDec">0,00</span> h
+              <span class="recap-tdv-key">Décimal</span>
+              <span class="recap-tdv-val"><span id="recapTdvDec">0,00</span> h</span>
             </div>
           </div>
         </div>
@@ -677,6 +704,8 @@
       <div class="bottombar">
         <button class="settings-btn" id="openSettings">⚙ Paramètres · Aide</button>
       </div>
+
+      <div class="version" id="appVersion"></div>
     </div>
   </div>
 
@@ -733,6 +762,15 @@
   </div>
 
 <script>
+  /* ====================================================== */
+  /*  VERSION DE L'APP — modifier cette ligne à chaque MAJ  */
+  const APP_VERSION = "1.2";
+  /* ====================================================== */
+  document.addEventListener('DOMContentLoaded', () => {
+    const v = document.getElementById('appVersion');
+    if (v) v.textContent = 'Version ' + APP_VERSION;
+  });
+
   /* ---------- PWA : manifeste + service worker (mono-fichier) ---------- */
   (function () {
     // Manifeste généré dynamiquement (Blob) -> installable + plein écran,
